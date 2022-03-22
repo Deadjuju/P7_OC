@@ -8,5 +8,5 @@ def execution_time(funct):
         end_time = time.time()
         print(f"EXECUTION: {(end_time - start_time):.3f}s\n")
 
-        return funct(*args)
+        return funct(*args, **kwargs)
     return wrapper
