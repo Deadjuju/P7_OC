@@ -18,4 +18,4 @@ def execution_time(funct):
 def extract_csv(path):
     with open(path, 'r') as f:
         actions_file = csv.reader(f)
-        return [Action(action) for action in actions_file]
+        return [Action(action) for action in actions_file if action != ['name', 'price', 'profit']]
