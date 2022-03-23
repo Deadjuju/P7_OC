@@ -1,4 +1,7 @@
+import csv
 import time
+
+from actions_class import Action
 
 
 def execution_time(funct):
@@ -10,3 +13,9 @@ def execution_time(funct):
 
         return funct(*args, **kwargs)
     return wrapper
+
+
+def extract_csv(path):
+    with open(path, 'r') as f:
+        actions_file = csv.reader(f)
+        return [Action(action) for action in actions_file]
