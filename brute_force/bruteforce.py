@@ -1,16 +1,6 @@
-import csv
 from itertools import combinations
 
-from actions_class import Action
 from utils import execution_time
-
-
-BUDGET = 500
-
-
-with open('../data_csv/first_list.csv', 'r') as f:
-    actions_file = csv.reader(f)
-    all_actions = [Action(action) for action in actions_file]
 
 
 @execution_time
@@ -30,6 +20,14 @@ def bruteforce(actions):
 
 
 if __name__ == '__main__':
+    from utils import extract_csv
+
+    file = '../data_csv/first_list.csv'
+
+    BUDGET = 500
+
+    all_actions = extract_csv(path=file)
+
     best_comb = bruteforce(actions=all_actions)
 
     print("-------------- Best Choice: --------------")
