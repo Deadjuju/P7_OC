@@ -1,14 +1,9 @@
-import csv
 from typing import Tuple, List
 
 from actions_class import Action
 from utils import execution_time
 
 BUDGET = 500
-
-with open('../data_csv/first_list.csv', 'r') as f:
-    actions_file = csv.reader(f)
-    all_actions = [Action(action) for action in actions_file]
 
 
 @execution_time
@@ -34,8 +29,13 @@ def greedy(budget: int, actions) -> Tuple[List[Action], float, float]:
             sum([action.profit for action in selected_actions]))
 
 
-best_selected_actions = greedy(BUDGET, all_actions)
+if __name__ == '__main__':
+    from utils import extract_csv
 
-print(f"Actions sélectionnées: {best_selected_actions[0]}")
-print(f"Argent dépensé: {best_selected_actions[1]:.2f}€.")
-print(f"Profit: {best_selected_actions[2]:.2f}€.")
+    all_actions = extract_csv(path='../data_csv/first_list.csv')
+
+    best_selected_actions = greedy(BUDGET, all_actions)
+
+    print(f"Actions sélectionnées: {best_selected_actions[0]}")
+    print(f"Argent dépensé: {best_selected_actions[1]:.2f}€.")
+    print(f"Profit: {best_selected_actions[2]:.2f}€.")
