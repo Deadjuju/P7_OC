@@ -7,7 +7,7 @@ class Action:
         self.profit = round(self.cost * float(action[2].replace("%", "")) / 100, 2)
 
     def __str__(self) -> str:
-        return f"{self.name} - {self.cost}€"
+        return f"{self.name}€"
 
     def __repr__(self) -> str:
         return f"{self.name}"

@@ -20,7 +20,18 @@ def extract_csv(path, is_decimal_prices=False):
     if not is_decimal_prices:
         with open(path, 'r') as f:
             actions_file = csv.reader(f)
-            return [Action(action) for action in actions_file if action != ['name', 'price', 'profit']]
+            all_actions = []
+
+            for action in actions_file:
+                if action != ['name', 'price', 'profit']:
+                    name = action[0]
+                    cost = float(action[1])
+                    profit = round(float(action[2].replace("%", "")), 2)
+                    if cost > 0:
+                        all_actions.append(Action([name, str(cost), str(profit)]))
+            return all_actions
+
+            # return [Action(action) for action in actions_file if action != ['name', 'price', 'profit']]
 
     else:
         with open(path, 'r') as f:
@@ -31,7 +42,7 @@ def extract_csv(path, is_decimal_prices=False):
                 if action != ['name', 'price', 'profit']:
                     name = action[0]
                     cost = float(action[1])*100
-                    profit = round(float(action[2][:-1]) / 100, 2)*100
+                    profit = round(float(action[2].replace("%", "")), 2)*100
                     if cost > 0:
                         all_actions.append(Action([name, str(cost), str(profit)]))
             return all_actions
