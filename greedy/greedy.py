@@ -3,8 +3,6 @@ from typing import Tuple, List
 from actions_class import Action
 from utils import execution_time
 
-BUDGET = 500
-
 
 @execution_time
 def greedy(budget: int, actions) -> Tuple[List[Action], float, float]:
@@ -32,7 +30,13 @@ def greedy(budget: int, actions) -> Tuple[List[Action], float, float]:
 if __name__ == '__main__':
     from utils import extract_csv
 
-    all_actions = extract_csv(path='../data_csv/first_list.csv')
+    file = '../data_csv/first_list.csv'
+    file2 = '../data_csv/dataset1_Python+P7.csv'
+    file3 = '../data_csv/dataset1_Python+P7.csv'
+
+    BUDGET = 500
+
+    all_actions = extract_csv(path=file3)
 
     best_selected_actions = greedy(BUDGET, all_actions)
 
