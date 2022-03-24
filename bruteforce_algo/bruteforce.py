@@ -4,7 +4,7 @@ from utils import execution_time
 
 
 @execution_time
-def brute_force(actions):
+def brute_force(budget, actions):
     max_profit = 0
     best_combination = None
     n = 1
@@ -12,7 +12,7 @@ def brute_force(actions):
         for comb in combinations(actions, n):
             money_spent = sum([action_price.cost for action_price in comb])
             total_profit = sum([profit.profit for profit in comb])
-            if total_profit > max_profit and money_spent <= BUDGET:
+            if total_profit > max_profit and money_spent <= budget:
                 max_profit = total_profit
                 best_combination = comb
         n += 1
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     all_actions = extract_csv(path=file)
 
-    best_comb = brute_force(actions=all_actions)
+    best_comb = brute_force(budget=BUDGET, actions=all_actions)
 
     print("-------------- Best Choice: --------------")
     print(best_comb)
