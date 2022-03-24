@@ -5,7 +5,7 @@ from utils import execution_time
 
 
 @execution_time
-def greedy(budget: int, actions) -> List[Action]:
+def get_greedy(budget: int, actions) -> List[Action]:
     """
     Greedy algorithm to quickly calculate an estimate of the most profitable stocks
     :param budget: budget limit not to be exceeded
@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     all_actions = extract_csv(path=file3)
 
-    best_selected_actions = greedy(BUDGET, all_actions)
+    best_selected_actions = get_greedy(BUDGET, all_actions)
 
     print(f"Actions sélectionnées: {best_selected_actions}")
     print(f"Argent dépensé: {sum([action.cost for action in best_selected_actions]):.2f}€.")
