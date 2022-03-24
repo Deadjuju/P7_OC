@@ -5,8 +5,7 @@ from utils import execution_time
 
 
 @execution_time
-# def greedy(budget: int, actions) -> Tuple[List[Action], float, float]:
-def greedy(budget: int, actions):
+def greedy(budget: int, actions) -> List[Action]:
     """
     Greedy algorithm to quickly calculate an estimate of the most profitable stocks
     :param budget: budget limit not to be exceeded
@@ -23,9 +22,6 @@ def greedy(budget: int, actions):
             selected_actions.append(current_action)
             money_spent += current_action.cost
 
-    # return ([action.name for action in selected_actions],
-    #         money_spent,
-    #         sum([action.profit for action in selected_actions]))
     return selected_actions
 
 
@@ -45,7 +41,3 @@ if __name__ == '__main__':
     print(f"Actions sélectionnées: {best_selected_actions}")
     print(f"Argent dépensé: {sum([action.cost for action in best_selected_actions]):.2f}€.")
     print(f"Profit: {sum([action.profit for action in best_selected_actions]):.2f}€.")
-
-    # print(f"Actions sélectionnées: {best_selected_actions[0]}")
-    # print(f"Argent dépensé: {best_selected_actions[1]:.2f}€.")
-    # print(f"Profit: {best_selected_actions[2]:.2f}€.")
