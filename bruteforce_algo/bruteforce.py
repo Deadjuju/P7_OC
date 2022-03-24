@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     all_actions = extract_csv(path=file)
 
-    best_comb = bruteforce(actions=all_actions)
+    best_comb = brute_force(actions=all_actions)
 
     print("-------------- Best Choice: --------------")
     print(best_comb)
