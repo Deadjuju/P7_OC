@@ -4,7 +4,7 @@ from utils import execution_time
 
 
 @execution_time
-def bruteforce(actions):
+def brute_force(actions):
     max_profit = 0
     best_combination = None
     n = 1
