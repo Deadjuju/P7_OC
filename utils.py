@@ -42,7 +42,7 @@ def extract_csv(path, is_decimal_prices=False):
                 if action != ['name', 'price', 'profit']:
                     name = action[0]
                     cost = float(action[1])*100
-                    profit = round(float(action[2].replace("%", "")), 2)*100
+                    profit = round(float(action[2].replace("%", "")), 2)
                     if cost > 0:
                         all_actions.append(Action([name, str(cost), str(profit)]))
             return all_actions
