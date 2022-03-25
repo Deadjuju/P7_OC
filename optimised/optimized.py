@@ -9,13 +9,14 @@ def get_matrix_prices(budget, actions: list):
         matrix.append(line)
 
     # Search optimised solution for which case
-    for i in range(1, len(actions) + 1):
-        for w in range(1, budget + 1):
-            if actions[i - 1].cost <= w:
-                matrix[i][w] = max(actions[i - 1].profit + matrix[i - 1][w - int(actions[i - 1].cost)],
-                                   matrix[i - 1][w])
+    for action in range(1, len(actions) + 1):
+        for budget_step in range(1, budget + 1):
+            if actions[action - 1].cost <= budget_step:
+                matrix[action][budget_step] = max(
+                    actions[action - 1].profit + matrix[action - 1][budget_step - int(actions[action - 1].cost)],
+                    matrix[action - 1][budget_step])
             else:
-                matrix[i][w] = matrix[i - 1][w]
+                matrix[action][budget_step] = matrix[action - 1][budget_step]
 
     return matrix
 
