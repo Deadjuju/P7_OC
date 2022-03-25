@@ -43,34 +43,34 @@ def choose_algorithm(user_choice):
 
 
 def execute_algorithm(file_path, algorithm_choice):
-    best_selected_actions = []
+    best_selected_stocks = []
     is_decimal_prices = False
 
     if algorithm_choice == "greedy":
-        all_actions = extract_csv(path=file_path[1])
-        best_selected_actions = get_greedy(BUDGET, all_actions)
+        all_stocks = extract_csv(path=file_path[1])
+        best_selected_stocks = get_greedy(BUDGET, all_stocks)
 
     elif algorithm_choice == "bruteforce":
-        all_actions = extract_csv(path=file_path[1])
-        best_selected_actions = brute_force(BUDGET, all_actions)
+        all_stocks = extract_csv(path=file_path[1])
+        best_selected_stocks = brute_force(BUDGET, all_stocks)
 
     elif algorithm_choice == "optimized":
         if file_path[0] == "1" or file_path[0] == "2":
             is_decimal_prices = True
         if is_decimal_prices:
             budget = BUDGET * 100 - 1
-            all_actions = extract_csv(path=file_path[1], is_decimal_prices=is_decimal_prices)
+            all_stocks = extract_csv(path=file_path[1], is_decimal_prices=is_decimal_prices)
         else:
             budget = BUDGET
-            all_actions = extract_csv(path=file_path[1])
+            all_stocks = extract_csv(path=file_path[1])
 
-        best_selected_actions = get_actions_list(budget, all_actions)
+        best_selected_stocks = get_actions_list(budget, all_stocks)
 
-    money_pent = sum([action.cost for action in best_selected_actions])
-    profit = sum([action.profit for action in best_selected_actions])
+    money_pent = sum([action.cost for action in best_selected_stocks])
+    profit = sum([action.profit for action in best_selected_stocks])
 
     text = f"********** {algorithm_choice.upper()} - {file_path[1]} ********** \n" \
-           f" • Actions sélectionnées:\n   --->|| {best_selected_actions}\n" \
+           f" • Actions sélectionnées:\n   --->|| {best_selected_stocks}\n" \
            f" • Argent dépensé: {((money_pent / 100) if is_decimal_prices else money_pent):.2f}€.\n" \
            f" • Profit: {((profit / 100) if is_decimal_prices else profit):.2f}€."
     print(text)
