@@ -5,6 +5,11 @@ from actions_class import Action
 
 
 def execution_time(funct):
+    """
+    Calculate the execution time of a function and print it
+    :param funct: Function to be analyzed
+    """
+
     def wrapper(*args, **kwargs):
         start_time = time.time()
         funct(*args, **kwargs)
@@ -16,33 +21,37 @@ def execution_time(funct):
     return wrapper
 
 
-def extract_csv(path, is_decimal_prices=False):
+def extract_csv(path: str, is_decimal_prices: bool = False):
+    """
+    Extract data from a csv file
+    :param path: file path
+    :param is_decimal_prices: indication if the prices are decimal
+    :return: stock list
+    """
     if not is_decimal_prices:
         with open(path, 'r') as f:
-            actions_file = csv.reader(f)
-            all_actions = []
+            stocks_file = csv.reader(f)
+            all_stocks = []
 
-            for action in actions_file:
-                if action != ['name', 'price', 'profit']:
-                    name = action[0]
-                    cost = float(action[1])
-                    profit = round(float(action[2].replace("%", "")), 2)
+            for stock in stocks_file:
+                if stock != ['name', 'price', 'profit']:
+                    name = stock[0]
+                    cost = float(stock[1])
+                    profit = round(float(stock[2].replace("%", "")), 2)
                     if cost > 0:
-                        all_actions.append(Action([name, str(cost), str(profit)]))
-            return all_actions
-
-            # return [Action(action) for action in actions_file if action != ['name', 'price', 'profit']]
+                        all_stocks.append(Action([name, str(cost), str(profit)]))
+            return all_stocks
 
     else:
         with open(path, 'r') as f:
-            actions_file = csv.reader(f)
-            all_actions = []
+            stocks_file = csv.reader(f)
+            all_stocks = []
 
-            for action in actions_file:
-                if action != ['name', 'price', 'profit']:
-                    name = action[0]
-                    cost = float(action[1])*100
-                    profit = round(float(action[2].replace("%", "")), 2)
+            for stock in stocks_file:
+                if stock != ['name', 'price', 'profit']:
+                    name = stock[0]
+                    cost = float(stock[1]) * 100
+                    profit = round(float(stock[2].replace("%", "")), 2)
                     if cost > 0:
-                        all_actions.append(Action([name, str(cost), str(profit)]))
-            return all_actions
+                        all_stocks.append(Action([name, str(cost), str(profit)]))
+            return all_stocks
