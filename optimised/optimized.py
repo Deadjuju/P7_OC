@@ -9,15 +9,14 @@ def get_matrix_prices(budget, actions: list):
         matrix.append(line)
 
     # Search optimised solution for which case
-    for action in range(1, len(actions) + 1):
+    for i_action, action in enumerate(actions, start=1):
         for budget_step in range(1, budget + 1):
-            if actions[action - 1].cost <= budget_step:
-                matrix[action][budget_step] = max(
-                    actions[action - 1].profit + matrix[action - 1][budget_step - int(actions[action - 1].cost)],
-                    matrix[action - 1][budget_step])
+            if action.cost <= budget_step:
+                matrix[i_action][budget_step] = max(
+                    action.profit + matrix[i_action - 1][budget_step - int(action.cost)],
+                    matrix[i_action - 1][budget_step])
             else:
-                matrix[action][budget_step] = matrix[action - 1][budget_step]
-
+                matrix[i_action][budget_step] = matrix[i_action - 1][budget_step]
     return matrix
 
 
@@ -66,7 +65,7 @@ if __name__ == '__main__':
         print(selected_actions)
         print(f"Actions sélectionnées: {selected_actions}")
         print(f"Argent dépensé: {total_cost / 100 :.2f}€.")
-        print(f"Profit: {total_return / (100 * 100) :.2f}€.")
+        print(f"Profit: {total_return / (100) :.2f}€.")
 
     else:
         print(selected_actions)
