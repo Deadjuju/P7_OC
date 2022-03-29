@@ -1,7 +1,7 @@
 import csv
 import time
 
-from actions_class import Action
+from stocks_class import Stock
 
 
 def execution_time(funct):
@@ -39,7 +39,7 @@ def extract_csv(path: str, is_decimal_prices: bool = False):
                     cost = float(stock[1])
                     profit = round(float(stock[2].replace("%", "")), 2)
                     if cost > 0:
-                        all_stocks.append(Action([name, str(cost), str(profit)]))
+                        all_stocks.append(Stock([name, str(cost), str(profit)]))
             return all_stocks
 
     else:
@@ -53,5 +53,5 @@ def extract_csv(path: str, is_decimal_prices: bool = False):
                     cost = float(stock[1]) * 100
                     profit = round(float(stock[2].replace("%", "")), 2)
                     if cost > 0:
-                        all_stocks.append(Action([name, str(cost), str(profit)]))
+                        all_stocks.append(Stock([name, str(cost), str(profit)]))
             return all_stocks

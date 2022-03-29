@@ -1,11 +1,11 @@
 from typing import Tuple, List
 
-from actions_class import Action
+from stocks_class import Stock
 from utils import execution_time
 
 
 @execution_time
-def get_greedy(budget: int, actions) -> List[Action]:
+def get_greedy(budget: int, actions) -> List[Stock]:
     """
     Greedy algorithm to quickly calculate an estimate of the most profitable stocks
     :param budget: budget limit not to be exceeded
