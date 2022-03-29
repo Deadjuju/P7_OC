@@ -4,18 +4,18 @@ from utils import execution_time
 
 
 @execution_time
-def brute_force(budget, actions):
+def brute_force(budget, stocks):
     """
      Brute force algorithm - calculation of the optimal combination
     :param budget: Client's maximum budget for the purchase of stocks
-    :param actions: list of stocks available
+    :param stocks: list of stocks available
     :return: the most profitable combination
     """
     max_profit = 0
     best_combination = None
     n = 1
-    while n <= len(actions):
-        for comb in combinations(actions, n):
+    while n <= len(stocks):
+        for comb in combinations(stocks, n):
             money_spent = sum([action_price.cost for action_price in comb])
             total_profit = sum([profit.profit for profit in comb])
             if total_profit > max_profit and money_spent <= budget:
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     BUDGET = 500
 
     all_actions = extract_csv(path=file)
-    best_comb = brute_force(budget=BUDGET, actions=all_actions)
+    best_comb = brute_force(budget=BUDGET, stocks=all_actions)
 
     print("-------------- Best Choice: --------------")
     print(best_comb)
