@@ -1,10 +1,12 @@
 from itertools import combinations
+from typing import List
 
+from stocks_class import Stock
 from utils import execution_time
 
 
 @execution_time
-def brute_force(budget, stocks):
+def brute_force(budget: int, stocks: list) -> List[Stock]:
     """
      Brute force algorithm - calculation of the optimal combination
     :param budget: Client's maximum budget for the purchase of stocks
