@@ -1,15 +1,25 @@
+from typing import List
+
+from stocks_class import Stock
 from utils import execution_time
 
 
-def get_matrix_prices(budget, actions: list):
+def get_matrix_prices(budget: int, stocks: List[Stock]) -> List[List[float]]:
+    """
+    Create a matrix with the optimal profit of each stock at each budget step
+    :param budget: budget limit not to be exceeded
+    :param stocks: list of all actions
+    :return: matrix with optimal profit
+    """
+
     # Create matrix
     matrix = []
-    for _ in range(len(actions) + 1):
+    for _ in range(len(stocks) + 1):
         line = [0 for _ in range(budget + 1)]
         matrix.append(line)
 
     # Search optimised solution for which case
-    for i_action, action in enumerate(actions, start=1):
+    for i_action, action in enumerate(stocks, start=1):
         for budget_step in range(1, budget + 1):
             if action.cost <= budget_step:
                 matrix[i_action][budget_step] = max(
@@ -21,18 +31,24 @@ def get_matrix_prices(budget, actions: list):
 
 
 @execution_time
-def get_actions_list(budget, actions_list: list):
-    matrix = get_matrix_prices(budget, actions_list)
+def get_actions_list(budget: int, stocks: List[Stock]) -> List[Stock]:
+    """
+    Optimized algorithm to quickly calculate the most profitable stocks
+    :param budget: Client's maximum budget for the purchase of stocks
+    :param stocks: list of stocks available
+    :return: the most profitable combination
+    """
 
-    n = len(actions_list)
+    matrix = get_matrix_prices(budget=budget, stocks=stocks)
+
+    n = len(stocks)
     selection = []
 
     while budget >= 0 and n >= 0:
-        action = actions_list[n - 1]
-        if matrix[n][budget] == matrix[n - 1][budget - int(action.cost)] + action.profit:
-            selection.append(action)
-            # print(selected_actions)
-            budget -= int(action.cost)
+        stock = stocks[n - 1]
+        if matrix[n][budget] == matrix[n - 1][budget - int(stock.cost)] + stock.profit:
+            selection.append(stock)
+            budget -= int(stock.cost)
         n -= 1
     return selection
 
@@ -65,7 +81,7 @@ if __name__ == '__main__':
         print(selected_actions)
         print(f"Actions sélectionnées: {selected_actions}")
         print(f"Argent dépensé: {total_cost / 100 :.2f}€.")
-        print(f"Profit: {total_return / (100) :.2f}€.")
+        print(f"Profit: {total_return / 100 :.2f}€.")
 
     else:
         print(selected_actions)
