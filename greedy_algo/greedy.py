@@ -1,28 +1,27 @@
-from typing import Tuple, List
+from typing import List
 
 from stocks_class import Stock
 from utils import execution_time
 
 
 @execution_time
-def get_greedy(budget: int, actions) -> List[Stock]:
+def get_greedy(budget: int, stocks: List[Stock]) -> List[Stock]:
     """
     Greedy algorithm to quickly calculate an estimate of the most profitable stocks
     :param budget: budget limit not to be exceeded
-    :param actions: list of all actions
-    :return: (selected_actions, total actions price, total gain after 2 years)
+    :param stocks: list of all actions
+    :return: list of stocks with the most profitable combination
     """
-    sorted_actions = sorted(actions, key=lambda x: x.profit)
-    selected_actions = []
+    sorted_stocks = sorted(stocks)
+    selected_stocks = []
     money_spent = 0
 
-    while sorted_actions:
-        current_action = sorted_actions.pop()
-        if current_action.cost + money_spent <= budget:
-            selected_actions.append(current_action)
-            money_spent += current_action.cost
-
-    return selected_actions
+    while sorted_stocks:
+        current_stock = sorted_stocks.pop()
+        if current_stock.cost + money_spent <= budget:
+            selected_stocks.append(current_stock)
+            money_spent += current_stock.cost
+    return selected_stocks
 
 
 if __name__ == '__main__':
@@ -34,10 +33,9 @@ if __name__ == '__main__':
 
     BUDGET = 500
 
-    all_actions = extract_csv(path=file3)
+    all_stocks = extract_csv(path=file3)
+    best_selected_stocks = get_greedy(BUDGET, all_stocks)
 
-    best_selected_actions = get_greedy(BUDGET, all_actions)
-
-    print(f"Actions sélectionnées: {best_selected_actions}")
-    print(f"Argent dépensé: {sum([action.cost for action in best_selected_actions]):.2f}€.")
-    print(f"Profit: {sum([action.profit for action in best_selected_actions]):.2f}€.")
+    print(f"Actions sélectionnées: {best_selected_stocks}")
+    print(f"Argent dépensé: {sum([stock.cost for stock in best_selected_stocks]):.2f}€.")
+    print(f"Profit: {sum([stock.profit for stock in best_selected_stocks]):.2f}€.")
