@@ -5,6 +5,12 @@ from utils import execution_time
 
 @execution_time
 def brute_force(budget, actions):
+    """
+     Brute force algorithm - calculation of the optimal combination
+    :param budget: Client's maximum budget for the purchase of stocks
+    :param actions: list of stocks available
+    :return: the most profitable combination
+    """
     max_profit = 0
     best_combination = None
     n = 1
@@ -27,7 +33,6 @@ if __name__ == '__main__':
     BUDGET = 500
 
     all_actions = extract_csv(path=file)
-
     best_comb = brute_force(budget=BUDGET, actions=all_actions)
 
     print("-------------- Best Choice: --------------")
