@@ -70,21 +70,21 @@ if __name__ == '__main__':
         budg = BUDGET
         all_actions = extract_csv(path=file)
 
-    selected_actions = get_stocks_list(budg, all_actions)
+    selected_stocks = get_stocks_list(budg, all_actions)
 
     # prices = prices_matrix[-1][-1]
-    total_cost = sum([action.cost for action in selected_actions])
-    total_return = sum([action.profit for action in selected_actions])
+    total_cost = sum([action.cost for action in selected_stocks])
+    total_return = sum([action.profit for action in selected_stocks])
 
     if is_decimal_prices:
 
-        print(selected_actions)
-        print(f"Actions sélectionnées: {selected_actions}")
+        print(selected_stocks)
+        print(f"Actions sélectionnées: {selected_stocks}")
         print(f"Argent dépensé: {total_cost / 100 :.2f}€.")
         print(f"Profit: {total_return / 100 :.2f}€.")
 
     else:
-        print(selected_actions)
-        print(f"Actions sélectionnées: {selected_actions}")
+        print(selected_stocks)
+        print(f"Actions sélectionnées: {selected_stocks}")
         print(f"Argent dépensé: {total_cost}€.")
         print(f"Profit: {total_return}€.")
