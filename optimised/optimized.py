@@ -31,7 +31,7 @@ def get_matrix_prices(budget: int, stocks: List[Stock]) -> List[List[float]]:
 
 
 @execution_time
-def get_actions_list(budget: int, stocks: List[Stock]) -> List[Stock]:
+def get_stocks_list(budget: int, stocks: List[Stock]) -> List[Stock]:
     """
     Optimized algorithm to quickly calculate the most profitable stocks
     :param budget: Client's maximum budget for the purchase of stocks
@@ -70,7 +70,7 @@ if __name__ == '__main__':
         budg = BUDGET
         all_actions = extract_csv(path=file)
 
-    selected_actions = get_actions_list(budg, all_actions)
+    selected_actions = get_stocks_list(budg, all_actions)
 
     # prices = prices_matrix[-1][-1]
     total_cost = sum([action.cost for action in selected_actions])

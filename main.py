@@ -1,6 +1,6 @@
 from bruteforce_algo.bruteforce import brute_force
 from greedy_algo.greedy import get_greedy
-from optimised.optimized import get_actions_list
+from optimised.optimized import get_stocks_list
 from utils import extract_csv
 
 
@@ -64,14 +64,14 @@ def execute_algorithm(file_path, algorithm_choice):
             budget = BUDGET
             all_stocks = extract_csv(path=file_path[1])
 
-        best_selected_stocks = get_actions_list(budget, all_stocks)
+        best_selected_stocks = get_stocks_list(budget, all_stocks)
 
-    money_pent = sum([action.cost for action in best_selected_stocks])
+    money_spent = sum([action.cost for action in best_selected_stocks])
     profit = sum([action.profit for action in best_selected_stocks])
 
     text = f"********** {algorithm_choice.upper()} - {file_path[1]} ********** \n" \
            f" • Actions sélectionnées:\n   --->|| {best_selected_stocks}\n" \
-           f" • Argent dépensé: {((money_pent / 100) if is_decimal_prices else money_pent):.2f}€.\n" \
+           f" • Argent dépensé: {((money_spent / 100) if is_decimal_prices else money_spent):.2f}€.\n" \
            f" • Profit: {((profit / 100) if is_decimal_prices else profit):.2f}€."
     print(text)
 
