@@ -14,16 +14,14 @@ def brute_force(budget: int, stocks: list) -> List[Stock]:
     :return: the most profitable combination
     """
     max_profit = 0
-    best_combination = None
-    n = 1
-    while n <= len(stocks):
+    best_combination = []
+    for n, _ in enumerate(stocks):
         for comb in combinations(stocks, n):
             money_spent = sum([stock.cost for stock in comb])
             total_profit = sum([stock.profit for stock in comb])
             if total_profit > max_profit and money_spent <= budget:
                 max_profit = total_profit
                 best_combination = comb
-        n += 1
     return best_combination
 
 
