@@ -41,15 +41,11 @@ def get_stocks_list(budget: int, stocks: List[Stock]) -> List[Stock]:
 
     matrix = get_matrix_prices(budget=budget, stocks=stocks)
 
-    n = len(stocks)
     selection = []
-
-    while budget >= 0 and n >= 0:
-        stock = stocks[n - 1]
-        if matrix[n][budget] == matrix[n - 1][budget - int(stock.cost)] + stock.profit:
+    for n, stock in reversed(list(enumerate(stocks))):
+        if matrix[n+1][budget] == matrix[n][budget - int(stock.cost)] + stock.profit:
             selection.append(stock)
             budget -= int(stock.cost)
-        n -= 1
     return selection
 
 
@@ -72,12 +68,10 @@ if __name__ == '__main__':
 
     selected_stocks = get_stocks_list(budg, all_actions)
 
-    # prices = prices_matrix[-1][-1]
     total_cost = sum([action.cost for action in selected_stocks])
     total_return = sum([action.profit for action in selected_stocks])
 
     if is_decimal_prices:
-
         print(selected_stocks)
         print(f"Actions sélectionnées: {selected_stocks}")
         print(f"Argent dépensé: {total_cost / 100 :.2f}€.")
