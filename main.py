@@ -11,7 +11,12 @@ CHOICES = [("0", 'data_csv/first_list.csv'),
 BUDGET = 500
 
 
-def choose_file():
+def choose_file() -> tuple:
+    """
+    Choice of dataset to analyze
+    :return: tuple with choice number + the chosen data set
+    """
+
     choices = [ch[0] for ch in CHOICES]
     while True:
         print("Please choose the dataset to analyze:", * CHOICES, sep="\n-> ")
@@ -22,7 +27,12 @@ def choose_file():
             return CHOICES[int(user_choice)]
 
 
-def choose_algorithm(user_choice):
+def choose_algorithm(user_choice: tuple) -> str:
+    """
+    choice of algorithm
+    :param user_choice: dataset to analyze
+    :return: algorithm name
+    """
     print("Please choose an algorithm: ")
     if user_choice[0] == "0":
         while True:
@@ -42,7 +52,13 @@ def choose_algorithm(user_choice):
                 return algo_choice
 
 
-def execute_algorithm(file_path, algorithm_choice):
+def execute_algorithm(file_path: tuple, algorithm_choice: str) -> None:
+    """
+    Execution of the algorithm with the chosen data set
+    :param file_path: dataset to analyze
+    :param algorithm_choice: algorithm name
+
+    """
     best_selected_stocks = []
     is_decimal_prices = False
 
